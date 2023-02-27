@@ -1,0 +1,5 @@
+Fontawesome http://fontawesome.io/
+Linea http://www.linea.io/
+Raleway https://www.fontsquirrel.com/fonts/raleway
+Montserrat https://www.fontsquirrel.com/fonts/montserrat
+https://github.com/tokotype/PlusJakartaSans/releases
