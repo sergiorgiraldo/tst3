@@ -1,0 +1,46 @@
+From 72aecf93a7677d00f169afb0cca836ea414e50eb Mon Sep 17 00:00:00 2001
+From: Sergio Giraldo <sergio@giraldo.com.br>
+Date: Fri, 12 May 2023 13:37:11 +0200
+Subject: [PATCH] fixes:: by sergio giraldo @ 20230512T1337CEST, gpg signed
+
+---
+ baz  | 12 ++++++++++++
+ blah |  9 +++++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/baz b/baz
+index 8320b47..dd64b89 100644
+--- a/baz
++++ b/baz
+@@ -1,2 +1,14 @@
+ baz
+ 
++Et, tempor eget, gravida nec, lacus. Fusce eros nisi, ullamcorper blandit,
++ultricies eget, elementum eget, pede. Phasellus id risus vitae nisl ullamcorper
++congue. Proin est.
++
++Sed eleifend odio sed leo. Mauris tortor turpis, dignissim vel, ornare ac,
++ultricies quis, magna. Phasellus lacinia, augue ac dictum tempor, nisi felis
++ornare magna, eu vehicula tellus enim eu neque. Fusce est eros, sagittis eget,
++interdum a, ornare suscipit, massa. Sed vehicula elementum ligula. Aliquam erat
++volutpat. Donec odio. Quisque nunc. Integer cursus feugiat magna. Fusce ac elit
++ut elit aliquam suscipit. Duis leo est, interdum nec, varius in, facilisis
++vitae, odio. Phasellus eget leo at.
++
+diff --git a/blah b/blah
+index e69de29..4829d70 100644
+--- a/blah
++++ b/blah
+@@ -0,0 +1,9 @@
++this is somw lines
++
++Thanks in advance.
++
++sergio.rodrigues.giraldo@ing.com
++
++sergiorgiraldo@gmail.com
++
++Hermelinvlinderdi
+-- 
+2.40.1
+
