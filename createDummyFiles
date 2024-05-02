@@ -1,0 +1,134 @@
+#!/bin/bash
+
+PROGNAME="$(basename "${0}")"
+
+_usage() {
+    printf "%s\\n" "Usage: ${PROGNAME} [RANGE] [PATH] [FOLDERS] [SIZE][HELP]"
+    printf "%s\\n" "Create bunch of files with 10 random lines."
+    printf "%s\\n" "Example: ${PROGNAME} -r=10 -p=\"~/tmp\""
+    printf "%s\\n" "Example: ${PROGNAME} -r=10 -f=2"
+    printf "%s\\n" "Example: ${PROGNAME} -r=10 -s=2m"
+    printf "\\n"
+    printf "%s\\n" "  -r, --range       how many files, default 5"
+    printf "%s\\n" "  -p, --path        where to create, default current folder"
+    printf "%s\\n" "  -f, --folders     create up to 5 folders, default none"
+    printf "%s\\n" "  -s, --size        create binary files with specified byte size. use a number followed by b (byte), k (kb), m (mb), and g (gb)"
+    printf "\\n"
+    printf "%s\\n" "  -h, --help        show this help message and exit"
+    exit 1	
+}
+
+_die() {
+    _usage >&2; exit 1
+}
+
+_create_txt(){
+        where=$1
+        r=$RANDOM
+        q=$((RANDOM % 9 + 1))
+        echo "creating $where/$r.txt"
+        lorem --randomize --quote $q --lines 10 > "$where/$r.txt"    
+}
+
+_create_bin(){
+        where=$1
+        r=$RANDOM
+        echo "creating $where/$r.txt"
+        mkfile $SZ "$where/$r.txt"
+}
+
+#defaults
+RANGE=5
+WHR="."
+FOLDERS=""
+SZ=""
+
+#parse args
+while [ "$1" != "" ]; do
+    PARAM=`echo $1 | awk -F= '{print $1}'`
+    VALUE=`echo $1 | sed 's/^[^=]*=//g'`
+    case $PARAM in
+        -h | --help)
+            _usage
+            exit
+            ;;
+        -r | --range)
+            if [[ "$VALUE" =~ ^[0-9]+$ ]]; then
+                RANGE=$VALUE
+            else
+                echo "ERROR: Wrong number of files"
+                echo ""
+                _usage
+                exit
+            fi
+            ;;
+        -f | --folders)
+            if [[ "$VALUE" =~ ^([1-5])$ ]]; then
+                FOLDERS=$VALUE
+            else
+                echo "ERROR: Wrong number of folders"
+                echo " "
+                _usage
+                exit
+            fi
+            ;;
+        -p | --path)
+            if [ -d "$VALUE" ]; then
+                WHR=$VALUE
+            else
+                echo "ERROR: path does not exist."
+                echo " "
+                _usage
+                exit
+            fi    
+            ;;
+        -s | --size)
+            if [[ "$VALUE" =~ ^([0-9]+)(b|k|g)$ ]]; then
+                SZ=$VALUE
+            else
+                echo "ERROR: Size does not match the expected format"
+                echo " "
+                _usage
+                exit
+            fi
+            ;;
+        *)
+            echo "ERROR: unknown parameter \"$PARAM\""
+            _die
+            ;;
+    esac
+    shift
+done
+
+#tilde is not expanded inside quotes
+WHR_=`echo $WHR | sd '~' '/Users/GK47LX'`
+
+if [ "$FOLDERS" == "" ]; then
+    for ((run=1; run <= RANGE; run++))
+    do
+        if [ "$SZ" == "" ]; then
+            _create_txt "$WHR_"
+        else
+             _create_bin "$WHR_"
+        fi    
+    done
+else
+    for ((dirs=1; dirs <= FOLDERS; dirs++))
+    do
+        nb=$((dirs + 96))
+        chr=$(printf "\x$(printf %x $nb)")
+        nm="${chr}${chr}${chr}"
+        WHR2_="$WHR_/$nm"
+        
+        mkdir $WHR2_
+
+        for ((run=1; run <= RANGE; run++))
+        do
+            if [ "$SZ" == "" ]; then
+                _create_txt "$WHR2_"
+            else
+                _create_bin "$WHR2_"
+            fi    
+        done
+    done
+fi
