@@ -26,18 +26,18 @@ _die() {
 }
 
 _create_txt(){
-        where=$1
-        r=$RANDOM
-        q=$((RANDOM % 9 + 1))
-        echo "creating $where/$r.txt"
-        lorem --randomize --quote $q --lines 10 > "$where/$r.txt"    
+    where=$1
+    r=$RANDOM
+    q=$((RANDOM % 9 + 1))
+    echo "creating $where/$r.txt"
+    lorem --randomize --quote $q --lines 10 > "$where/$r.txt"    
 }
 
 _create_bin(){
-        where=$1
-        r=$RANDOM
-        echo "creating $where/$r.txt"
-        mkfile $SZ "$where/$r.txt"
+    where=$1
+    r=$RANDOM
+    echo "creating $where/$r.txt"
+    mkfile $SZ "$where/$r.txt"
 }
 
 _generate(){
@@ -107,7 +107,7 @@ FOLDERS=""
 SZ=""
 
 #parse
-_parse
+_parse "$@"
 
 #generate
 if [ "$FOLDERS" == "" ]; then
@@ -115,12 +115,13 @@ if [ "$FOLDERS" == "" ]; then
 else
     for ((dirs=1; dirs <= FOLDERS; dirs++))
     do
-        nb=$((dirs + 96))
-        chr=$(printf "\x$(printf %x $nb)")
+        chr=$(printf "\x$(printf %x $((dirs + 96)))")
         nm="${chr}${chr}${chr}"
         whr2="$WHR/$nm"
         
-        mkdir $whr2
+        if [ ! -d "$whr2" ]; then
+            mkdir $whr2
+        fi
 
         _generate $whr2
     done
