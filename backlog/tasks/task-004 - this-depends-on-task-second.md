@@ -4,8 +4,10 @@ title: this depends on task second
 status: To Do
 assignee: []
 created_date: '2025-07-19'
+updated_date: '2025-07-19'
 labels: []
-dependencies: []
+dependencies:
+  - task-002
 ---
 
 ## Description
