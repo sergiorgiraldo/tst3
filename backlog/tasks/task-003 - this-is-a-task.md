@@ -1,7 +1,7 @@
 ---
 id: task-003
 title: this is a task
-status: In Progress
+status: Done
 assignee: []
 created_date: '2025-07-19'
 updated_date: '2025-07-19'
