@@ -5,9 +5,10 @@ labels: []
 milestones: []
 date_format: yyyy-mm-dd
 max_column_width: 20
-default_editor: "/usr/bin/vim"
+default_editor: "/opt/homebrew/bin/nvim"
 auto_open_browser: true
 default_port: 6420
 remote_operations: true
 auto_commit: false
 zero_padded_ids: 3
+bypass_git_hooks: true
