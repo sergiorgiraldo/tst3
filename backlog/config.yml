@@ -1,4 +1,4 @@
-project_name: "TST 2"
+project_name: "TST 3"
 default_status: "To Do"
 statuses: ["To Do", "In Progress", "Done"]
 labels: []
@@ -9,6 +9,6 @@ default_editor: "/opt/homebrew/bin/nvim"
 auto_open_browser: true
 default_port: 6420
 remote_operations: true
-auto_commit: false
+auto_commit: true
 zero_padded_ids: 3
 bypass_git_hooks: true
