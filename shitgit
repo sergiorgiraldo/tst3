@@ -3,7 +3,7 @@ for i in {1..25}
 do
     date +"%Y-%m-%d %H:%M:%S.%3" >> aa9
     git add aa9
-    git commit
+    git commit -m "aa9 file"
     git push
     sleep 1
 done
